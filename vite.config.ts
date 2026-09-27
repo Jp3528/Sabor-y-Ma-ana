@@ -19,9 +19,6 @@ const hostingConfig: HostingConfig = existsSync(hostingConfigPath)
 
 const { d1, r2 } = hostingConfig;
 
-// Detecta si el build esta ocurriendo dentro de Vercel.
-const isVercel = process.env.VERCEL === "1";
-
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 
@@ -51,24 +48,6 @@ export default defineConfig(async () => {
   process.env.WRANGLER_WRITE_LOGS ??= "false";
   process.env.WRANGLER_LOG_PATH ??= ".wrangler/logs";
   process.env.MINIFLARE_REGISTRY_PATH ??= ".wrangler/registry";
-
-  // Vercel usa Nitro.
-  if (isVercel) {
-    const { nitro } = await import("nitro/vite");
-
-    return {
-      plugins: [
-        vinext(),
-        sites(),
-        nitro({
-          preset: "vercel",
-          output: {
-            dir: ".output",
-          },
-        }),
-      ],
-    };
-  }
 
   // Codex/local continua usando Cloudflare como hasta ahora.
   const { cloudflare } = await import("@cloudflare/vite-plugin");
