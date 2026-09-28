@@ -1,6 +1,6 @@
 # SABOR & MAÑANA
 
-![Vista previa de SABOR & MAÑANA](docs/preview.webp)
+![Vista previa de SABOR & MAÑANA](docs/preview.png)
 
 Aplicación web responsive para un restaurante de desayunos, brunch y almuerzos en Lima. Incluye catálogo filtrable, favoritos, detalle de platos, carrito lateral, testimonios, reserva de mesa y continuación del pedido por WhatsApp.
 
